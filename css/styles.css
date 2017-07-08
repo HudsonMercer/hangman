@@ -5,6 +5,14 @@
     top: 0px;
     left: 0px;
     margin: 0px;
+    position: fixed;
+}
+
+.inputSubmitButton{
+    margin: 1em;
+}
+.inputTextBox{
+    margin: 1em;
 }
 
 .phraseLetterDiv{
@@ -14,12 +22,17 @@
     animation: phraseKeyFrames .5s forwards;
 }
 
+/*
 .gameStartButton{
     background-color: green;
     width: 15vw;
     height: 10vh;
 }
-
+*/
+.testDiv {
+	background-color: yellow;
+    height: 2em;
+}
 @keyframes phraseKeyFrames{
     0% {
         margin-left: 0em;

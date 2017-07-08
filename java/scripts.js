@@ -57,7 +57,36 @@ $('.gameStartButton').click(function(){
     }
 
 });
+    //Letter guess control section
     
+    
+    $('.inputTextBox').keyup(function(e){
+        if(e.keyCode === 13){
+            guessSubmit();
+        } else {
+            $('.testDiv').html($('.inputTextBox').val());
+        }
+    });
+    
+    //clear on click/focus
+    $('.inputTextBox').on('click focusin', function(){
+        this.value='';
+    });
+    
+//    $('.inputSubmitButton, .inputTextBox').submit(function(){
+//        console.log('sum text');
+//    });
+    
+    function guessSubmit(){
+        alert(($('.inputTextBox').val()));
+        
+        if(winPhrase.includes($('.inputTextBox').val())){
+            alert('YUP');
+        } else {
+            alert('NOPE');
+        }
+        
+    }
     
   
 });

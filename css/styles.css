@@ -1,0 +1,39 @@
+.bodyDiv{
+    background-color:darkgray;
+    width: 100vw;
+    height: 100vh;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+}
+
+.phraseLetterDiv{
+    background-color: indianred;
+    font-size: 2em;
+    display: inline-block;
+    animation: phraseKeyFrames .5s forwards;
+}
+
+.gameStartButton{
+    background-color: green;
+    width: 15vw;
+    height: 10vh;
+}
+
+@keyframes phraseKeyFrames{
+    0% {
+        margin-left: 0em;
+        opacity: 0;
+
+    }
+    
+    50%{
+        margin-left: .5em;
+    }
+    
+    100% {
+        margin-left: 0em;
+        opacity: 1;
+    }
+    
+}

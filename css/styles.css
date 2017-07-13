@@ -8,6 +8,11 @@
     position: fixed;
 }
 
+.hangmanGraphic {
+	background-color: dodgerblue;
+    border: solid 2px white;
+}
+
 .inputSubmitButton{
     margin: 1em;
 }

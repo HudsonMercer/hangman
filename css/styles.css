@@ -11,7 +11,12 @@
 .hangmanGraphic {
 	background-color: dodgerblue;
     border: solid 2px white;
+    width: 10vw;
+    height: 10vw;
+    display: inline-block;
+    text-align: center;
 }
+
 
 .inputSubmitButton{
     margin: 1em;
@@ -25,6 +30,7 @@
     font-size: 2em;
     display: inline-block;
     animation: phraseKeyFrames .5s forwards;
+    width: .6em;
 }
 
 /*

@@ -2,7 +2,7 @@
 /*jslint plusplus: true, vars: true, devel: true, browser: true */
 /*global $, jQuery */
 var tryCount = 10,
-    winPhrase = 'This is a regular String.',
+    winPhrase = 'Reg-ex t^st of all normal characters.,?=-',
     phraseLetters = [],
     phraseLettersDivID = [],
     gameState = 'ready',
@@ -21,6 +21,7 @@ then populate the divs with either an underscore or a letter if that div has bee
         var i = 0;
         console.log(gameState);
         switch (gameState) {
+                
         case 'ready':
             gameState = 'busy';
             for (i = 0; i < winPhrase.length; i++) {
@@ -28,8 +29,15 @@ then populate the divs with either an underscore or a letter if that div has bee
             }
             setTimeout(function () {
                 var allLetterDivs = $('.phraseLetterDiv');
+                //Fill in special characters for free and add them to the guessed letters list.
                 for (i = 0; i < winPhrase.length; i++) {
                     $(allLetterDivs[i]).attr('id', 'phraseLetterID' + i);
+                    if (winPhrase[i] === ' ') {
+                        $(allLetterDivs[i]).html('&nbsp');
+                        guessedLetters += ' ';
+                    } else if (winPhrase[i].match(/[!@#$%\^&*()\-+=_';":?.,]/) !== null) {
+                        $(allLetterDivs[i]).html(winPhrase[i]);
+                    }
                 }
                 gameState = 'inplay';
             }, ((winPhrase.length) * 100) + 50);
@@ -76,7 +84,7 @@ then populate the divs with either an underscore or a letter if that div has bee
             guessedLetters += $('.inputTextBox').val();
             
             for (i = 0; i < winPhrase.length; i++) {
-                if (winPhrase[i].toLowerCase() === $('.inputTextBox').val().toLowerCase()) {
+                if (winPhrase[i].toLowerCase() === $('.inputTextBox').val().toLowerCase() && $('.inputTextBox').val().toLowerCase() !== ' ') {
                     letterIndices.push(i);
                     letterIndices.push(winPhrase[i]);
 //                    console.log(letterIndices);

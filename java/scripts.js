@@ -6,7 +6,8 @@ var tryCount = 10,
     phraseLetters = [],
     phraseLettersDivID = [],
     gameState = 'ready',
-    guessesLeft = 3;
+    guessesLeft = 3,
+    guessedLetters = '';
 
 $(document).ready(function () {
     'use strict';
@@ -70,8 +71,10 @@ then populate the divs with either an underscore or a letter if that div has bee
             letterIndices = [],
             allLetterDivs = $('.phraseLetterDiv');
         
-        if (winPhrase.toLowerCase().includes($('.inputTextBox').val().toLowerCase()) && gameState === 'inplay') {
-//            alert('YUP');
+        if (winPhrase.toLowerCase().includes($('.inputTextBox').val().toLowerCase()) && gameState === 'inplay' && guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) === -1) {
+//            alert('YUP'); 
+            guessedLetters += $('.inputTextBox').val();
+            
             for (i = 0; i < winPhrase.length; i++) {
                 if (winPhrase[i].toLowerCase() === $('.inputTextBox').val().toLowerCase()) {
                     letterIndices.push(i);
@@ -84,15 +87,21 @@ then populate the divs with either an underscore or a letter if that div has bee
                     }
                 }
             }
-        } else if (gameState === 'inplay') {
-            alert('NOPE');
-            guessesLeft -= 1;
+            
+        } else if (gameState === 'inplay' && guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) === -1) {
             if (guessesLeft === 0) {
                 //show the div for game over and reset the game
                 alert('Man has been hung.');
+                guessedLetters = [];
                 guessesLeft = 3;
             }
+            alert('E404: LETTER NOT FOUND');
+            guessesLeft -= 1;
+            
+        } else if (guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) !== -1) {
+            alert('LETTER ALREADY GUESSED IDIOT');
         }
+        
         $('.inputTextBox').val('');
     }
     

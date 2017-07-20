@@ -2,21 +2,89 @@
 /*jslint plusplus: true, vars: true, devel: true, browser: true */
 /*global $, jQuery */
 var tryCount = 10,
-    winPhrase = 'Reg-ex t^st of all normal characters.,?=-',
+    phrases = ['This is a phrase', 'Win phrase 2'],
+    winPhrase = '234523 asde .',
     phraseLetters = [],
     phraseLettersDivID = [],
     gameState = 'ready',
     guessesLeft = 3,
     guessedLetters = '';
+    
 
 $(document).ready(function () {
     'use strict';
-/*get all the letters in the win phrase and then create that many divs inside of the phrase container
-then populate the divs with either an underscore or a letter if that div has been clicked. */
+    
+    //Function definitions
+    //Adds a letter div to the phrase container with the ID of phraseLetterDiv(i) when called.
     function addLetterDiv(i) {
         $('.phraseContainer').append('<div class="phraseLetterDiv" id="phraseLetterID' + i + '">_</div>');
     }
     
+        //Reset game, pretty self-explanitory.
+    function resetGame() {
+        var i = 0;
+        if (gameState === 'inplay') {
+//            for (i = 0; i < $('.phraseLetterDiv').length; i++) {
+//                phraseLettersDivID.push('#phraseLetterID' + i);
+////                console.log(phraseLettersDivID[i]);
+//                $(phraseLettersDivID[i]).css('background-color', 'yellow');
+//            }
+            //remove all the divs. Ready gamestate.
+            for (i = 0; i < winPhrase.length; i++) {
+                $('#phraseLetterID' + i).remove();
+            }
+            $('.gameStartButton').css('background-color', 'green');
+            $('.gameStartButton').val('Start Game');
+            guessedLetters = [];
+            guessesLeft = 3;
+            gameState = 'ready';
+            alert('YOU DIED');
+        }
+    }
+
+    
+    //Controls what happens when a player guesses a letter.
+    function guessSubmit() {
+
+        var i = 0,
+            j = 0,
+            letterIndices = [],
+            allLetterDivs = $('.phraseLetterDiv');
+
+        if (winPhrase.toLowerCase().includes($('.inputTextBox').val().toLowerCase()) && gameState === 'inplay' && guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) === -1) {
+//            alert('YUP'); 
+            guessedLetters += $('.inputTextBox').val();
+
+            for (i = 0; i < winPhrase.length; i++) {
+                if (winPhrase[i].toLowerCase() === $('.inputTextBox').val().toLowerCase() && $('.inputTextBox').val().toLowerCase() !== ' ') {
+                    letterIndices.push(i);
+                    letterIndices.push(winPhrase[i]);
+//                    console.log(letterIndices);
+                    //store index, value, ...
+                    //Change div html to value by index stored with content of index
+                    for (j = 0; j < letterIndices.length; j += 2) {
+                        $(allLetterDivs[letterIndices[j]]).html(letterIndices[j + 1]);
+                    }
+                }
+            }
+
+        } else if (gameState === 'inplay' && guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) === -1) {
+            if (guessesLeft === 0) {
+                //TODO: add div to show game over and reset the game on loss.
+                resetGame();
+            } else {
+                alert('E404: LETTER NOT FOUND');
+                guessesLeft -= 1;
+            }
+
+        } else if (guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) !== -1) {
+            alert('LETTER ALREADY GUESSED IDIOT');
+        }
+
+        $('.inputTextBox').val('');
+    }
+    
+    //Start game button control section
     $('.gameStartButton').click(function () {
         var i = 0;
         console.log(gameState);
@@ -47,19 +115,8 @@ then populate the divs with either an underscore or a letter if that div has bee
             break;
 
         case 'inplay':
-            for (i = 0; i < $('.phraseLetterDiv').length; i++) {
-                phraseLettersDivID.push('#phraseLetterID' + i);
-                console.log(phraseLettersDivID[i]);
-                $(phraseLettersDivID[i]).css('background-color', 'yellow');
-
-            }
-            //remove all the divs. Ready gamestate.
-            for (i = 0; i < winPhrase.length; i++) {
-                $('#phraseLetterID' + i).remove();
-            }
-            $(this).css('background-color', 'green');
-            $(this).val('Start Game');
-            gameState = 'ready';
+            //TODO: Indicate game has been lost and give player button to reset the game instead of just resetting the game automatically without output.
+            resetGame();
             break;
 
         case 'busy':
@@ -71,54 +128,13 @@ then populate the divs with either an underscore or a letter if that div has bee
 
     });
     
-    //Function for letter guess control
-    function guessSubmit() {
-        
-        var i = 0,
-            j = 0,
-            letterIndices = [],
-            allLetterDivs = $('.phraseLetterDiv');
-        
-        if (winPhrase.toLowerCase().includes($('.inputTextBox').val().toLowerCase()) && gameState === 'inplay' && guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) === -1) {
-//            alert('YUP'); 
-            guessedLetters += $('.inputTextBox').val();
-            
-            for (i = 0; i < winPhrase.length; i++) {
-                if (winPhrase[i].toLowerCase() === $('.inputTextBox').val().toLowerCase() && $('.inputTextBox').val().toLowerCase() !== ' ') {
-                    letterIndices.push(i);
-                    letterIndices.push(winPhrase[i]);
-//                    console.log(letterIndices);
-                    //store index, value, ...
-                    //Change div html to value by index stored with content of index
-                    for (j = 0; j < letterIndices.length; j += 2) {
-                        $(allLetterDivs[letterIndices[j]]).html(letterIndices[j + 1]);
-                    }
-                }
-            }
-            
-        } else if (gameState === 'inplay' && guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) === -1) {
-            if (guessesLeft === 0) {
-                //show the div for game over and reset the game
-                alert('Man has been hung.');
-                guessedLetters = [];
-                guessesLeft = 3;
-            }
-            alert('E404: LETTER NOT FOUND');
-            guessesLeft -= 1;
-            
-        } else if (guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) !== -1) {
-            alert('LETTER ALREADY GUESSED IDIOT');
-        }
-        
-        $('.inputTextBox').val('');
-    }
-    
     //Textbox input button control section
     $('.inputSubmitButton').click(function () {
         guessSubmit();
         $('.inputTextBox').val('');
     });
     
+    //Clean up code to keep the text box clear of unnessicary characters and starting text
     $('.inputTextBox').keyup(function (e) {
         if (e.keyCode === 13) {
             guessSubmit();
@@ -127,7 +143,7 @@ then populate the divs with either an underscore or a letter if that div has bee
         }
     });
     
-    //clear on click/focus for text input box
+    //Clear on click/focus for text input box
     $('.inputTextBox').on('click focusin', function () {
         this.value = '';
     });

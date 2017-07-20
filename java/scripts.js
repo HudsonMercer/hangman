@@ -3,7 +3,7 @@
 /*global $, jQuery */
 var tryCount = 10,
     phrases = ['This is a phrase', 'Win phrase 2'],
-    winPhrase = '234523 asde .',
+    winPhrase = '234523 Asde .',
     phraseLetters = [],
     phraseLettersDivID = [],
     gameState = 'ready',
@@ -42,6 +42,32 @@ $(document).ready(function () {
         }
     }
 
+        //Iterate over guessed letters, if true for all, win the game and reset.
+    function checkWinGame() {
+        var i = 0,
+            checkString = '%nbsp';
+        
+        //Clean the guessed letters string of duplicates if they get in there somehow, store as checkString
+        for (i = 0; i < guessedLetters.length; i++) {
+            if (guessedLetters.lastIndexOf(guessedLetters[i]) === guessedLetters.indexOf(guessedLetters[i])) {
+                checkString += guessedLetters.charAt(i);
+            }
+        }
+        console.log(checkString);
+        //Iterate over checkString to see if winPhrase contains all of the same letters, win the game if you're at the end of the string and havent gotten a fail, return otherwise.
+        for (i = 0; i < winPhrase.length; i++) {
+            if (winPhrase.toLowerCase().includes(checkString.charAt(i).toLowerCase !== false)) {
+                if (i >= winPhrase.length) {
+                    alert('Game Won!');
+                } else {
+                    console.log('Something went wrong or you didnt win. checkString: ', checkString);
+                    return false;
+                }
+                
+            }
+        }
+        
+    }
     
     //Controls what happens when a player guesses a letter.
     function guessSubmit() {
@@ -67,6 +93,8 @@ $(document).ready(function () {
                     }
                 }
             }
+
+            checkWinGame();
 
         } else if (gameState === 'inplay' && guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) === -1) {
             if (guessesLeft === 0) {
@@ -105,6 +133,7 @@ $(document).ready(function () {
                         guessedLetters += ' ';
                     } else if (winPhrase[i].match(/[!@#$%\^&*()\-+=_';":?.,]/) !== null) {
                         $(allLetterDivs[i]).html(winPhrase[i]);
+                        guessedLetters += $(allLetterDivs[i]).html();
                     }
                 }
                 gameState = 'inplay';
@@ -137,6 +166,7 @@ $(document).ready(function () {
     //Clean up code to keep the text box clear of unnessicary characters and starting text
     $('.inputTextBox').keyup(function (e) {
         if (e.keyCode === 13) {
+            //Guess a letter the player pressed enter.
             guessSubmit();
         } else {
             $('.testDiv').html($('.inputTextBox').val());

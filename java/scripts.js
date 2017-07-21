@@ -3,24 +3,33 @@
 /*global $, jQuery */
 var tryCount = 10,
     phrases = ['This is a phrase', 'Win phrase 2'],
-    winPhrase = '234523 Asde .',
+    winPhrase = 'w w w w x x 3 3 5 ',
     phraseLetters = [],
     phraseLettersDivID = [],
     gameState = 'ready',
     guessesLeft = 3,
-    guessedLetters = '';
+    guessedLetters = '',
+    phraseMap = {};
     
 
 $(document).ready(function () {
     'use strict';
     
     //Function definitions
+    //Function to map number of letter occurances in string passed to it and returns the map
+    function testFunction(inputString) {
+        var i = 0;
+        for (i = 0; i < inputString.length; i++) {
+            phraseMap[inputString[i]] = inputString.match(new RegExp(inputString[i], 'g')).length;
+        }
+        return phraseMap;
+    }
     //Adds a letter div to the phrase container with the ID of phraseLetterDiv(i) when called.
     function addLetterDiv(i) {
         $('.phraseContainer').append('<div class="phraseLetterDiv" id="phraseLetterID' + i + '">_</div>');
     }
     
-        //Reset game, pretty self-explanitory.
+    //Reset game, pretty self-explanitory.
     function resetGame() {
         var i = 0;
         if (gameState === 'inplay') {
@@ -42,10 +51,10 @@ $(document).ready(function () {
         }
     }
 
-        //Iterate over guessed letters, if true for all, win the game and reset.
+    //Iterate over guessed letters, if true for all, win the game and reset.
     function checkWinGame() {
         var i = 0,
-            checkString = '%nbsp';
+            checkString = '';
         
         //Clean the guessed letters string of duplicates if they get in there somehow, store as checkString
         for (i = 0; i < guessedLetters.length; i++) {
@@ -56,9 +65,10 @@ $(document).ready(function () {
         console.log(checkString);
         //Iterate over checkString to see if winPhrase contains all of the same letters, win the game if you're at the end of the string and havent gotten a fail, return otherwise.
         for (i = 0; i < winPhrase.length; i++) {
-            if (winPhrase.toLowerCase().includes(checkString.charAt(i).toLowerCase !== false)) {
-                if (i >= winPhrase.length) {
-                    alert('Game Won!');
+            if (winPhrase.toLowerCase().includes(checkString.charAt(i).toLowerCase()) === true) {
+                console.log(winPhrase[i]);
+                if (i === winPhrase.length - 1) {
+                    console.log('Game Won!');
                 } else {
                     console.log('Something went wrong or you didnt win. checkString: ', checkString);
                     return false;
@@ -67,7 +77,7 @@ $(document).ready(function () {
             }
         }
         
-    }
+    } //THIS CODE IS SHITE, REFACTOR/REWRITE IT.
     
     //Controls what happens when a player guesses a letter.
     function guessSubmit() {

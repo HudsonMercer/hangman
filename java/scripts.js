@@ -65,7 +65,7 @@ $(document).ready(function () {
             }
         }
         
-    } //THIS CODE IS SHITE, REFACTOR/REWRITE IT.
+    }
     
     //Controls what happens when a player guesses a letter.
     function guessSubmit() {

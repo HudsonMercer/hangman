@@ -53,27 +53,15 @@ $(document).ready(function () {
 
     //Iterate over guessed letters, if true for all, win the game and reset.
     function checkWinGame() {
-        var i = 0,
-            checkString = '';
+        var i = 0;
         
-        //Clean the guessed letters string of duplicates if they get in there somehow, store as checkString
-        for (i = 0; i < guessedLetters.length; i++) {
-            if (guessedLetters.lastIndexOf(guessedLetters[i]) === guessedLetters.indexOf(guessedLetters[i])) {
-                checkString += guessedLetters.charAt(i);
-            }
-        }
-        console.log(checkString);
-        //Iterate over checkString to see if winPhrase contains all of the same letters, win the game if you're at the end of the string and havent gotten a fail, return otherwise.
         for (i = 0; i < winPhrase.length; i++) {
-            if (winPhrase.toLowerCase().includes(checkString.charAt(i).toLowerCase()) === true) {
-                console.log(winPhrase[i]);
+            if (guessedLetters.toLowerCase().indexOf(winPhrase[i].toLowerCase()) !== -1) {
                 if (i === winPhrase.length - 1) {
                     console.log('Game Won!');
-                } else {
-                    console.log('Something went wrong or you didnt win. checkString: ', checkString);
-                    return false;
                 }
-                
+            } else if (guessedLetters.toLowerCase().indexOf(winPhrase[i].toLowerCase()) === -1) {
+                return;
             }
         }
         

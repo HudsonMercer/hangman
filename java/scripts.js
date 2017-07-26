@@ -47,9 +47,9 @@ $(document).ready(function () {
             }
             $('.gameStartButton').css('background-color', 'green');
             $('.gameStartButton').val('Start Game');
+            $('.hangmanGraphic').css('background-color', 'dodgerblue');
             guessedLetters = [];
             guessesLeft = guessesGiven;
-            $('.hangmanGraphic').css('background-color', 'dodgerblue');
             gameState = 'ready';
 //            alert('YOU DIED');    
         }
@@ -91,16 +91,17 @@ $(document).ready(function () {
             letterIndices = [],
             allLetterDivs = $('.phraseLetterDiv'),
             bodyParts = $('.hangmanGraphic');
-
+        //if the text in the input box matches a character in the win string while the game is 'inplay' and the player has not already guessed the letter...
         if (winPhrase.toLowerCase().includes($('.inputTextBox').val().toLowerCase()) && gameState === 'inplay' && guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) === -1) {
+            
             guessedLetters += $('.inputTextBox').val().toString();
-
+            //Run through the winPhrase and see if where the character falls at, then add the index and value to letterIndicies in that order.
             for (i = 0; i < winPhrase.length; i++) {
                 if (winPhrase[i].toLowerCase() === $('.inputTextBox').val().toLowerCase() && $('.inputTextBox').val().toLowerCase() !== ' ') {
                     letterIndices.push(i);
                     letterIndices.push(winPhrase[i]);
                     //store index, value, ...
-                    //Change div html to value by index stored with content of index
+                    //Change letter div html to value, by index, to stored content at given index to reveal the letter to the player.
                     for (j = 0; j < letterIndices.length; j += 2) {
                         $(allLetterDivs[letterIndices[j]]).html(letterIndices[j + 1]);
                     }
@@ -108,11 +109,11 @@ $(document).ready(function () {
             }
 
             checkWinGame();
-
+          //If the player guessed a letter that is NOT in the winPhrase string, remove a guess, change the corrisponding hangman graphic and then add the letter to the guessed letters string.
         } else if (gameState === 'inplay' && guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) === -1) {
             guessesLeft -= 1;
             guessedLetters += $('.inputTextBox').val().toString();
-//                alert('E404: LETTER NOT FOUND');  
+            //TODO: Add sound/visual alert to the player failing to guess a correct letter.
             for (i = 0; i <= guessesGiven - guessesLeft; i++) {
                 $(bodyParts[i]).css('background-color', 'red');
             }
@@ -121,8 +122,9 @@ $(document).ready(function () {
                 loseGame();
             }
                 
-
+          //If the player guesses a letter that has already been guessed, tell them so. No penalty.
         } else if (guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) !== -1) {
+            //TODO: add sound/visual alert that the player has already guessed that letter or it was given to them for free.
             alert('LETTER ALREADY GUESSED IDIOT');
         }
 

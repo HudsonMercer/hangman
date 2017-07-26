@@ -7,7 +7,8 @@ var tryCount = 10,
     phraseLetters = [],
     phraseLettersDivID = [],
     gameState = 'ready',
-    guessesLeft = 3,
+    guessesLeft = 6,
+    guessesGiven = 6,
     guessedLetters = '',
     phraseMap = {};
     
@@ -47,9 +48,10 @@ $(document).ready(function () {
             $('.gameStartButton').css('background-color', 'green');
             $('.gameStartButton').val('Start Game');
             guessedLetters = [];
-            guessesLeft = 3;
+            guessesLeft = guessesGiven;
+            $('.hangmanGraphic').css('background-color', 'dodgerblue');
             gameState = 'ready';
-//            alert('YOU DIED');
+//            alert('YOU DIED');    
         }
     }
     
@@ -87,10 +89,11 @@ $(document).ready(function () {
         var i = 0,
             j = 0,
             letterIndices = [],
-            allLetterDivs = $('.phraseLetterDiv');
+            allLetterDivs = $('.phraseLetterDiv'),
+            bodyParts = $('.hangmanGraphic');
 
         if (winPhrase.toLowerCase().includes($('.inputTextBox').val().toLowerCase()) && gameState === 'inplay' && guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) === -1) {
-            guessedLetters += $('.inputTextBox').val();
+            guessedLetters += $('.inputTextBox').val().toString();
 
             for (i = 0; i < winPhrase.length; i++) {
                 if (winPhrase[i].toLowerCase() === $('.inputTextBox').val().toLowerCase() && $('.inputTextBox').val().toLowerCase() !== ' ') {
@@ -107,13 +110,17 @@ $(document).ready(function () {
             checkWinGame();
 
         } else if (gameState === 'inplay' && guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) === -1) {
-            if (guessesLeft === 0) {
-                //TODO: add div to show game over and reset the game on loss.
-                loseGame();
-            } else {
-                alert('E404: LETTER NOT FOUND');
-                guessesLeft -= 1;
+            guessesLeft -= 1;
+            guessedLetters += $('.inputTextBox').val().toString();
+//                alert('E404: LETTER NOT FOUND');  
+            for (i = 0; i <= guessesGiven - guessesLeft; i++) {
+                $(bodyParts[i]).css('background-color', 'red');
             }
+            
+            if (guessesLeft === 0) {
+                loseGame();
+            }
+                
 
         } else if (guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) !== -1) {
             alert('LETTER ALREADY GUESSED IDIOT');

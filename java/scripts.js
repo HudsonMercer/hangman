@@ -3,7 +3,7 @@
 /*global $, jQuery */
 var tryCount = 10,
     phrases = ['This is a phrase', 'Win phrase 2'],
-    winPhrase = 'w w w w x x 3 3 5 ',
+    winPhrase = 'This is a regular test phrase.',
     phraseLetters = [],
     phraseLettersDivID = [],
     gameState = 'ready',
@@ -11,9 +11,11 @@ var tryCount = 10,
     guessedLetters = '',
     phraseMap = {};
     
-
 $(document).ready(function () {
     'use strict';
+    $('.winFrame').hide();
+    $('.loseFrame').hide();
+    
     
     //Function definitions
     //Function to map number of letter occurances in string passed to it and returns the map
@@ -29,10 +31,10 @@ $(document).ready(function () {
         $('.phraseContainer').append('<div class="phraseLetterDiv" id="phraseLetterID' + i + '">_</div>');
     }
     
-    //Reset game, pretty self-explanitory.
+    //Reset game, pretty self-explanitory. Called when you need to reset the game.
     function resetGame() {
         var i = 0;
-        if (gameState === 'inplay') {
+        if (gameState === 'inplay' || 'busy') {
 //            for (i = 0; i < $('.phraseLetterDiv').length; i++) {
 //                phraseLettersDivID.push('#phraseLetterID' + i);
 ////                console.log(phraseLettersDivID[i]);
@@ -47,8 +49,19 @@ $(document).ready(function () {
             guessedLetters = [];
             guessesLeft = 3;
             gameState = 'ready';
-            alert('YOU DIED');
+//            alert('YOU DIED');
         }
+    }
+    
+    //Called to win the game
+    function winGame() {
+        $('.winFrame').show();
+        gameState = 'busy';
+    }
+    
+    //Called to lose the game
+    function loseGame() {
+        $('.loseFrame').show();
     }
 
     //Iterate over guessed letters, if true for all, win the game and reset.
@@ -59,6 +72,7 @@ $(document).ready(function () {
             if (guessedLetters.toLowerCase().indexOf(winPhrase[i].toLowerCase()) !== -1) {
                 if (i === winPhrase.length - 1) {
                     console.log('Game Won!');
+                    winGame();
                 }
             } else if (guessedLetters.toLowerCase().indexOf(winPhrase[i].toLowerCase()) === -1) {
                 return;
@@ -76,14 +90,12 @@ $(document).ready(function () {
             allLetterDivs = $('.phraseLetterDiv');
 
         if (winPhrase.toLowerCase().includes($('.inputTextBox').val().toLowerCase()) && gameState === 'inplay' && guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) === -1) {
-//            alert('YUP'); 
             guessedLetters += $('.inputTextBox').val();
 
             for (i = 0; i < winPhrase.length; i++) {
                 if (winPhrase[i].toLowerCase() === $('.inputTextBox').val().toLowerCase() && $('.inputTextBox').val().toLowerCase() !== ' ') {
                     letterIndices.push(i);
                     letterIndices.push(winPhrase[i]);
-//                    console.log(letterIndices);
                     //store index, value, ...
                     //Change div html to value by index stored with content of index
                     for (j = 0; j < letterIndices.length; j += 2) {
@@ -97,7 +109,7 @@ $(document).ready(function () {
         } else if (gameState === 'inplay' && guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) === -1) {
             if (guessesLeft === 0) {
                 //TODO: add div to show game over and reset the game on loss.
-                resetGame();
+                loseGame();
             } else {
                 alert('E404: LETTER NOT FOUND');
                 guessesLeft -= 1;
@@ -175,5 +187,18 @@ $(document).ready(function () {
     $('.inputTextBox').on('click focusin', function () {
         this.value = '';
     });
+    
+    //Reset the game when the player wins and clicks on the win banner.
+    $('.winFrame').click(function () {
+        resetGame();
+        $('.winFrame').hide();
+    });
+    
+    //Reset the game when the player loses and clicks on the win banner.
+    $('.loseFrame').click(function () {
+        resetGame();
+        $('.loseFrame').hide();
+    });
+    
   
 });

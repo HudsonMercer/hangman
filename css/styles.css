@@ -18,28 +18,40 @@
 }
 
 
-.inputSubmitButton{
+.inputSubmitButton {
     margin: 1em;
 }
-.inputTextBox{
+.inputTextBox {
     margin: 1em;
 }
 
-.phraseLetterDiv{
+.phraseLetterDiv {
     background-color: indianred;
     font-size: 2em;
     display: inline-block;
     animation: phraseKeyFrames .5s forwards;
     width: .6em;
 }
-
-/*
-.gameStartButton{
-    background-color: green;
-    width: 15vw;
+.winFrame {
+    background-color: aquamarine;
+    width: 100vw;
     height: 10vh;
+    position: absolute;
+    top: 10vh;
+    left: 0px;
+    display: inline;
+    text-align: center;
 }
-*/
+.loseFrame {
+    background-color: crimson;
+    width: 100vw;
+    height: 10vh;
+    position: absolute;
+    top: 10vh;
+    left: 0px;
+    display: inline;
+    text-align: center;
+}
 .testDiv {
 	background-color: yellow;
     height: 2em;

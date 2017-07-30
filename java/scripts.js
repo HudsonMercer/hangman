@@ -2,7 +2,7 @@
 /*jslint plusplus: true, vars: true, devel: true, browser: true */
 /*global $, jQuery */
 var tryCount = 10,
-    phrases = ['This is a phrase', 'Win phrase 2', 'Phrase 3', 'Phrase 4', 'Phrase 5'],
+    phrases = ['There is no time like the present.', 'Nobody loves you.', 'If you never fail, try harder.', 'War is good for absolutely nothing.', 'Winter'],
     winPhrase = 'This is a regular test phrase.',
     phraseLetters = [],
     phraseLettersDivID = [],
@@ -35,7 +35,7 @@ $(document).ready(function () {
         
         console.log(i);
         console.log(phrases[i]);
-//        winPhrase = phrases[i];
+        winPhrase = phrases[i];
     }
     //Function to map number of letter occurances in string passed to it and returns the map.
     function testFunction(inputString) {
@@ -54,12 +54,6 @@ $(document).ready(function () {
     function resetGame() {
         var i = 0;
         if (gameState === 'inplay' || 'busy') {
-//            for (i = 0; i < $('.phraseLetterDiv').length; i++) {
-//                phraseLettersDivID.push('#phraseLetterID' + i);
-////                console.log(phraseLettersDivID[i]);
-//                $(phraseLettersDivID[i]).css('background-color', 'yellow');
-//            }
-            //remove all the divs. Ready gamestate.
             for (i = 0; i < winPhrase.length; i++) {
                 $('#phraseLetterID' + i).remove();
             }
@@ -69,7 +63,6 @@ $(document).ready(function () {
             guessedLetters = [];
             guessesLeft = guessesGiven;
             gameState = 'ready';
-//            alert('YOU DIED');    
         }
     }
     
@@ -154,11 +147,11 @@ $(document).ready(function () {
     $('.gameStartButton').click(function () {
         var i = 0;
 //        console.log(gameState);
-        startGame();
         switch (gameState) {
                 
         case 'ready':
             gameState = 'busy';
+            startGame();
             for (i = 0; i < winPhrase.length; i++) {
                 setTimeout(addLetterDiv, i * 100, i);
             }

@@ -2,7 +2,7 @@
 /*jslint plusplus: true, vars: true, devel: true, browser: true */
 /*global $, jQuery */
 var tryCount = 10,
-    phrases = ['This is a phrase', 'Win phrase 2'],
+    phrases = ['This is a phrase', 'Win phrase 2', 'Phrase 3', 'Phrase 4', 'Phrase 5'],
     winPhrase = 'This is a regular test phrase.',
     phraseLetters = [],
     phraseLettersDivID = [],
@@ -19,7 +19,25 @@ $(document).ready(function () {
     
     
     //Function definitions
-    //Function to map number of letter occurances in string passed to it and returns the map
+    //Maps random number from range arg2-arg3 to arg4-arg5 from arg1.
+    function mapNumber(numberIn, minIn, maxIn, minOut, maxOut) {
+        var y = (numberIn - minIn) / (maxIn - minIn) * (maxOut - minOut) + minOut;
+        return Math.round(y);
+    }
+    //Function to set the win phrase.
+    function startGame() {
+        var i = Math.random(),
+            j = 0;
+        console.log(i);
+        i = mapNumber(i, 0, 1, 0, phrases.length - 1);
+        console.log(i);
+        i = Math.round(i);
+        
+        console.log(i);
+        console.log(phrases[i]);
+//        winPhrase = phrases[i];
+    }
+    //Function to map number of letter occurances in string passed to it and returns the map.
     function testFunction(inputString) {
         var i = 0;
         for (i = 0; i < inputString.length; i++) {
@@ -64,6 +82,7 @@ $(document).ready(function () {
     //Called to lose the game
     function loseGame() {
         $('.loseFrame').show();
+        gameState = 'busy';
     }
 
     //Iterate over guessed letters, if true for all, win the game and reset.
@@ -123,7 +142,7 @@ $(document).ready(function () {
             }
                 
           //If the player guesses a letter that has already been guessed, tell them so. No penalty.
-        } else if (guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) !== -1) {
+        } else if (guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) !== -1 && gameState === 'inplay') {
             //TODO: add sound/visual alert that the player has already guessed that letter or it was given to them for free.
             alert('LETTER ALREADY GUESSED IDIOT');
         }
@@ -134,7 +153,8 @@ $(document).ready(function () {
     //Start game button control section
     $('.gameStartButton').click(function () {
         var i = 0;
-        console.log(gameState);
+//        console.log(gameState);
+        startGame();
         switch (gameState) {
                 
         case 'ready':

@@ -9,12 +9,15 @@
 }
 
 .hangmanGraphic {
-	background-color: #f3cd54;
-    border: solid 2px white;
-    width: 10vw;
-    height: 10vw;
+	background-color: #F3CD53;
+    border: solid 2px #9C7A0B;
+    border-radius: 10px;
+    margin: .5em;
+    width: 15vw;
+    height: 15vw;
     display: inline-block;
     text-align: center;
+    box-shadow: 5px 5px 20px 5px rgba(0,0,0,.5);
 }
 
 
@@ -26,16 +29,18 @@
 }
 
 .phraseLetterDiv {
-    background-color: #f3cd54;
+    background-color: #FFEEB7;
     font-size: 2em;
-    color: #9c7a0b;
     text-align: center;
-    display: inline-block;
-    margin: .3em;
-    animation: phraseKeyFrames .5s forwards;
     width: 1.2em;
+    color: #9C7A0B;
+    border: solid 3px #F3CD53;
     border-radius: 8px;
+    margin: .4em;
+    padding-bottom: 3px;
+    display: inline-block;
     box-shadow: 5px 5px 8px 5px rgba(0,0,0,.3);
+    animation: phraseKeyFrames .5s forwards;
 }
 .winFrame {
     background-color: #F3CD53;

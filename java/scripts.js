@@ -3,14 +3,36 @@
 /*global $, jQuery */
 var tryCount = 10,
     phrases = ['There is no time like the present.', 'Nobody loves you.', 'If you never fail, try harder.', 'War is good for absolutely nothing.', 'Winter'],
-    winPhrase = 'This is a regular test phrase.',
+    winPhrase = '',
     phraseLetters = [],
     phraseLettersDivID = [],
     gameState = 'ready',
     guessesLeft = 6,
     guessesGiven = 6,
     guessedLetters = '',
-    phraseMap = {};
+    phraseMap = {},
+    colorScheme = {
+        pri: '#3D6E9E',
+        priLighter: '#6793BE',
+        priLightest: '#A7C5E2',
+        priDarker: '#1E578E',
+        priDarkest: '#0E3A65',
+        sec: '#F3CD53',
+        secLighter: '#FFE181',
+        secLightest: '#FFEEB7',
+        secDarker: '#DBB021`',
+        secDarkest: '#9C7A0B',
+        ter: '#4E49AA',
+        terLighter: '#7772C7',
+        terLightest: '#B2AFE6',
+        terDarker: '#2F2999',
+        terDarkest: '#1B166D',
+        quar: '#F3B253',
+        quarLighter: '#FFCC81',
+        quarLightest: '#FFE2B7',
+        quarDarker: '#DB8F21',
+        quarDarkest: '#9C610B'
+    };
     
 $(document).ready(function () {
     'use strict';
@@ -122,7 +144,7 @@ $(document).ready(function () {
             guessedLetters += $('.inputTextBox').val().toString();
             //TODO: Add sound/visual alert to the player failing to guess a correct letter.
             for (i = 0; i <= guessesGiven - guessesLeft; i++) {
-                $(bodyParts[i]).css('background-color', 'red');
+                $(bodyParts[i]).css('background-color', colorScheme.terDarker);
             }
             
             if (guessesLeft === 0) {

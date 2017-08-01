@@ -171,11 +171,12 @@ $(document).ready(function () {
             }
             setTimeout(function () {
                 var allLetterDivs = $('.phraseLetterDiv');
-                //Fill in special characters for free and add them to the guessed letters list.
+                //Fill in special characters for free and add them to the guessed letters list. white space is faded away to 0 opacity.
                 for (i = 0; i < winPhrase.length; i++) {
                     $(allLetterDivs[i]).attr('id', 'phraseLetterID' + i);
                     if (winPhrase[i] === ' ') {
                         $(allLetterDivs[i]).html('&nbsp');
+                        $(allLetterDivs[i]).toggleClass('fadeAwayCss');
                         guessedLetters += ' ';
                     } else if (winPhrase[i].match(/[!@#$%\^&*()\-+=_';":?.,]/) !== null) {
                         $(allLetterDivs[i]).html(winPhrase[i]);
@@ -190,7 +191,6 @@ $(document).ready(function () {
             break;
 
         case 'inplay':
-            //TODO: Indicate game has been lost and give player button to reset the game instead of just resetting the game automatically without output.
             resetGame();
             break;
 

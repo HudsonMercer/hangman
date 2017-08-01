@@ -33,7 +33,7 @@
     font-size: 2em;
     text-align: center;
     width: 1.2em;
-    color: #9C7A0B;
+    color: #9C610B;
     border: solid 3px #F3CD53;
     border-radius: 8px;
     margin: .4em;
@@ -43,7 +43,8 @@
     animation: phraseKeyFrames .5s forwards;
 }
 .winFrame {
-    background-color: #F3CD53;
+    background-color: #6793BE;
+    color: #1B166D;
     width: 100vw;
     height: 10vh;
     position: absolute;

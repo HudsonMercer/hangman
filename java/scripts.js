@@ -41,12 +41,13 @@ $(document).ready(function () {
     
     
     //Function definitions
-    //Maps random number from range arg2-arg3 to arg4-arg5 from arg1.
+    //Maps random number from range arg2-arg3 to arg4-arg5 from arg1, then returns nearest int.
     function mapNumber(numberIn, minIn, maxIn, minOut, maxOut) {
         var y = (numberIn - minIn) / (maxIn - minIn) * (maxOut - minOut) + minOut;
         return Math.round(y);
     }
-    //Function to set the win phrase.
+    
+    //Function to set the win phrase at random.
     function startGame() {
         var i = Math.random(),
             j = 0;
@@ -54,14 +55,7 @@ $(document).ready(function () {
         i = Math.round(i);
         winPhrase = phrases[i];
     }
-    //Function to map number of letter occurances in string passed to it and returns the map.
-    function testFunction(inputString) {
-        var i = 0;
-        for (i = 0; i < inputString.length; i++) {
-            phraseMap[inputString[i]] = inputString.match(new RegExp(inputString[i], 'g')).length;
-        }
-        return phraseMap;
-    }
+    
     //Adds a letter div to the phrase container with the ID of phraseLetterDiv(i) when called.
     function addLetterDiv(i) {
         $('.phraseContainer').append('<div class="phraseLetterDiv" id="phraseLetterID' + i + '">_</div>');
@@ -76,20 +70,20 @@ $(document).ready(function () {
             }
             $('.gameStartButton').css('background-color', 'green');
             $('.gameStartButton').val('Start Game');
-            $('.hangmanGraphic').css('background-color', 'dodgerblue');
+            $('.hangmanGraphic').css('background-color', colorScheme.sec);
             guessedLetters = '';
             guessesLeft = guessesGiven;
             gameState = 'ready';
         }
     }
     
-    //Called to win the game
+    //Called to win the game and prevent input.
     function winGame() {
         $('.winFrame').show();
         gameState = 'busy';
     }
     
-    //Called to lose the game
+    //Called to lose the game and prevent input.
     function loseGame() {
         $('.loseFrame').show();
         gameState = 'busy';
@@ -113,6 +107,7 @@ $(document).ready(function () {
     }
     
     //Controls what happens when a player guesses a letter.
+    //TODO: Refactor code, needs to be broken into smaller segments, too complex.
     function guessSubmit() {
 
         var i = 0,
@@ -142,9 +137,10 @@ $(document).ready(function () {
         } else if (gameState === 'inplay' && guessedLetters.toLowerCase().indexOf($('.inputTextBox').val().toLowerCase()) === -1) {
             guessesLeft -= 1;
             guessedLetters += $('.inputTextBox').val().toString();
-            //TODO: Add sound/visual alert to the player failing to guess a correct letter.
+            //TODO: Add sound and visual(added) alert to the player failing to guess a correct letter.
             for (i = 0; i <= guessesGiven - guessesLeft; i++) {
-                $(bodyParts[i]).css('background-color', colorScheme.terDarker);
+                $(bodyParts[i]).css('background-color', colorScheme.ter);
+                $(bodyParts[i]).css('border-color', colorScheme.terDarkest);
             }
             
             if (guessesLeft === 0) {
@@ -160,6 +156,7 @@ $(document).ready(function () {
         $('.inputTextBox').val('');
     }
     
+    //Start of hook/listener section
     //Start game button control section
     $('.gameStartButton').click(function () {
         var i = 0;
@@ -212,17 +209,18 @@ $(document).ready(function () {
         $('.inputTextBox').val('');
     });
     
-    //Clean up code to keep the text box clear of unnessicary characters and starting text
+    //Clean up code that keeps the text input box clear of unnecessary characters and starting text.
     $('.inputTextBox').keyup(function (e) {
         if (e.keyCode === 13) {
             //Guess a letter the player pressed enter.
             guessSubmit();
-        } else {
-            $('.testDiv').html($('.inputTextBox').val());
         }
+//        else {
+//            $('.testDiv').html($('.inputTextBox').val());
+//        }
     });
     
-    //Clear on click/focus for text input box
+    //Clear on click/focus for text input box.
     $('.inputTextBox').on('click focusin', function () {
         this.value = '';
     });

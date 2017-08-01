@@ -1,5 +1,5 @@
 .bodyDiv{
-    background-color:darkgray;
+    background-color: #3D6E9E;
     width: 100vw;
     height: 100vh;
     top: 0px;
@@ -9,7 +9,7 @@
 }
 
 .hangmanGraphic {
-	background-color: dodgerblue;
+	background-color: #f3cd54;
     border: solid 2px white;
     width: 10vw;
     height: 10vw;
@@ -26,16 +26,19 @@
 }
 
 .phraseLetterDiv {
-    background-color: indianred;
+    background-color: #f3cd54;
     font-size: 2em;
+    color: #9c7a0b;
     text-align: center;
     display: inline-block;
+    margin: .3em;
     animation: phraseKeyFrames .5s forwards;
     width: 1.2em;
     border-radius: 8px;
+    box-shadow: 5px 5px 8px 5px rgba(0,0,0,.3);
 }
 .winFrame {
-    background-color: aquamarine;
+    background-color: #F3CD53;
     width: 100vw;
     height: 10vh;
     position: absolute;
@@ -43,9 +46,10 @@
     left: 0px;
     display: inline;
     text-align: center;
+    box-shadow: 5px 5px 8px 10px rgba(0,0,0,.5);
 }
 .loseFrame {
-    background-color: crimson;
+    background-color: #4E49AA;
     width: 100vw;
     height: 10vh;
     position: absolute;
@@ -53,6 +57,7 @@
     left: 0px;
     display: inline;
     text-align: center;
+    box-shadow: 5px 5px 8px 10px rgba(0,0,0,.5);
 }
 .testDiv {
 	background-color: yellow;

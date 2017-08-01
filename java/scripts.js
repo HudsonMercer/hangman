@@ -28,13 +28,8 @@ $(document).ready(function () {
     function startGame() {
         var i = Math.random(),
             j = 0;
-        console.log(i);
         i = mapNumber(i, 0, 1, 0, phrases.length - 1);
-        console.log(i);
         i = Math.round(i);
-        
-        console.log(i);
-        console.log(phrases[i]);
         winPhrase = phrases[i];
     }
     //Function to map number of letter occurances in string passed to it and returns the map.
@@ -60,7 +55,7 @@ $(document).ready(function () {
             $('.gameStartButton').css('background-color', 'green');
             $('.gameStartButton').val('Start Game');
             $('.hangmanGraphic').css('background-color', 'dodgerblue');
-            guessedLetters = [];
+            guessedLetters = '';
             guessesLeft = guessesGiven;
             gameState = 'ready';
         }

@@ -28,9 +28,11 @@
 .phraseLetterDiv {
     background-color: indianred;
     font-size: 2em;
+    text-align: center;
     display: inline-block;
     animation: phraseKeyFrames .5s forwards;
-    width: .6em;
+    width: 1.2em;
+    border-radius: 8px;
 }
 .winFrame {
     background-color: aquamarine;

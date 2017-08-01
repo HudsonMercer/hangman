@@ -8,13 +8,17 @@
     position: fixed;
 }
 
+.graphicsWrapper{
+    width: 100vw;
+    text-align: center;
+}
 .hangmanGraphic {
 	background-color: #F3CD53;
     border: solid 2px #9C7A0B;
     border-radius: 10px;
     margin: .5em;
-    width: 15vw;
-    height: 15vw;
+    width: 10vw;
+    height: 10vw;
     display: inline-block;
     text-align: center;
     box-shadow: 5px 5px 20px 5px rgba(0,0,0,.5);

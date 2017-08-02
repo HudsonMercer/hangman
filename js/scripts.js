@@ -2,7 +2,7 @@
 /*jslint plusplus: true, vars: true, devel: true, browser: true */
 /*global $, jQuery */
 var tryCount = 10,
-    phrases = ['There is no time like the present.', 'Nobody loves you.', 'If you never fail, try harder.', 'War is good for absolutely nothing.', 'Winter.'],
+    phrases = ['There is no time like the present.', 'Nobody loves you.', 'If you never fail, try harder.', 'War is good for absolutely nothing.', 'Winter.', 'This is a really long phrase that should take up at least 3-4 lines of the box and has weird characters.'],
     winPhrase = '',
     phraseLetters = [],
     phraseLettersDivID = [],
@@ -188,6 +188,10 @@ $(document).ready(function () {
                     }
                 }
                 gameState = 'inplay';
+                $('.startStopButton').css('box-shadow', '0px 0px 10px 5px rgba(0,0,0,0)');
+                $('.startStopButton').css('background-color', colorScheme.quar);
+                $('.startStopButton').css('color', colorScheme.quarDarkest);
+                $('.startStopButton').html('Stop Game.');
             }, ((winPhrase.length) * 100) + 50);
 
             $(this).css('background-color', 'red');
@@ -196,6 +200,10 @@ $(document).ready(function () {
 
         case 'inplay':
             resetGame();
+            $('.startStopButton').css('box-shadow', '5px 5px 20px 5px rgba(0,0,0,.5)');
+            $('.startStopButton').css('background-color', colorScheme.pri);
+            $('.startStopButton').css('color', colorScheme.priLightest);
+            $('.startStopButton').html('Start Game.');
             break;
 
         case 'busy':

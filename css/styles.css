@@ -1,4 +1,4 @@
-.bodyDiv{
+.bodyDiv {
     background-color: #3D6E9E;
     width: 100vw;
     height: 100vh;
@@ -7,20 +7,32 @@
     margin: 0px;
     position: fixed;
 }
-
-.graphicsWrapper{
+.startStopButton {
+    box-shadow: 5px 5px 20px 5px rgba(0,0,0,.5);
+    color: #A7C5E2;
+    width: 8em;
+    height: 2em;
+    margin: 1em;
+    padding-top: .75em;
+    text-align: center;
+    text-shadow: 3px 3px 8px rgba(0,0,0, .8);
+    display: inline-block;
+    transition: all .5s linear;
+}
+.graphicsWrapper {
     width: auto;
     text-align: center;
 /*    border: solid 2px #FF00FF;*/
     margin: .5em;
     margin-top: 1em;
-    margin-bottom: 2em;
-    padding: .5em;
+    margin-bottom: 4em;
+    padding: 1em;
     border-radius: 15px;
     background-color: #A7C5E2;
     box-shadow: 5px 5px 20px 5px rgba(0,0,0,.35);
 
 }
+
 .hangmanGraphic {
 	background-color: #F3CD53;
     border: solid 2px #9C7A0B;
@@ -37,6 +49,7 @@
 .inputSubmitButton {
     margin: 1em;
 }
+
 .inputTextBox {
     margin: 1em;
 }
@@ -56,11 +69,13 @@
     border: solid 3px #F3CD53;
     border-radius: 8px;
     margin: .4em;
+    margin-left: 0em;
     padding-bottom: 3px;
     display: inline-block;
     box-shadow: 5px 5px 8px 5px rgba(0,0,0,.3);
     animation: phraseKeyFrames .5s forwards;
 }
+
 .winFrame {
     background-color: #6793BE;
     color: #1B166D;
@@ -73,6 +88,7 @@
     text-align: center;
     box-shadow: 5px 5px 8px 10px rgba(0,0,0,.5);
 }
+
 .loseFrame {
     background-color: #4E49AA;
     width: 100vw;
@@ -84,7 +100,8 @@
     text-align: center;
     box-shadow: 5px 5px 8px 10px rgba(0,0,0,.5);
 }
-.fadeAwayCss{
+
+.fadeAwayCss {
     animation: fadeAwayKeyFrames 1s forwards;
 }
 
@@ -92,7 +109,8 @@
 	background-color: yellow;
     height: 2em;
 }
-@keyframes phraseKeyFrames{
+
+@keyframes phraseKeyFrames {
     0% {
         margin-left: 0em;
         opacity: 0;
@@ -100,7 +118,7 @@
     }
     
     50%{
-        margin-left: .5em;
+        margin-left: 1em;
     }
     
     100% {
@@ -110,7 +128,7 @@
     
 }
 
-@keyframes fadeAwayKeyFrames{
+@keyframes fadeAwayKeyFrames {
     0% {
         opacity: 1;
     }

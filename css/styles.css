@@ -9,8 +9,17 @@
 }
 
 .graphicsWrapper{
-    width: 100vw;
+    width: auto;
     text-align: center;
+/*    border: solid 2px #FF00FF;*/
+    margin: .5em;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    padding: .5em;
+    border-radius: 15px;
+    background-color: #A7C5E2;
+    box-shadow: 5px 5px 20px 5px rgba(0,0,0,.35);
+
 }
 .hangmanGraphic {
 	background-color: #F3CD53;
@@ -30,6 +39,12 @@
 }
 .inputTextBox {
     margin: 1em;
+}
+
+.phraseContainer {
+    padding: 3em;
+    width: auto;
+    box-shadow: inset 0px 0px 500px rgba(0,0,0,.65);
 }
 
 .phraseLetterDiv {
@@ -72,6 +87,7 @@
 .fadeAwayCss{
     animation: fadeAwayKeyFrames 1s forwards;
 }
+
 .testDiv {
 	background-color: yellow;
     height: 2em;

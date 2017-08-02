@@ -2,7 +2,7 @@
 /*jslint plusplus: true, vars: true, devel: true, browser: true */
 /*global $, jQuery */
 var tryCount = 10,
-    phrases = ['There is no time like the present.', 'Nobody loves you.', 'If you never fail, try harder.', 'War is good for absolutely nothing.', 'Winter'],
+    phrases = ['There is no time like the present.', 'Nobody loves you.', 'If you never fail, try harder.', 'War is good for absolutely nothing.', 'Winter.'],
     winPhrase = '',
     phraseLetters = [],
     phraseLettersDivID = [],

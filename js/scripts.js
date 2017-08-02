@@ -79,13 +79,17 @@ $(document).ready(function () {
     
     //Called to win the game and prevent input.
     function winGame() {
+        $('.winFrame').css('width', '0vw');
         $('.winFrame').show();
+        $(".winFrame").animate({width: '100vw'}, 350);
         gameState = 'busy';
     }
     
     //Called to lose the game and prevent input.
     function loseGame() {
+        $('.loseFrame').css('width', '0vw');
         $('.loseFrame').show();
+        $(".loseFrame").animate({width: '100vw'}, 350);
         gameState = 'busy';
     }
 

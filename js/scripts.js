@@ -68,8 +68,12 @@ $(document).ready(function () {
             for (i = 0; i < winPhrase.length; i++) {
                 $('#phraseLetterID' + i).remove();
             }
-            $('.gameStartButton').css('background-color', 'green');
-            $('.gameStartButton').val('Start Game');
+//            $('.gameStartButton').css('background-color', 'green');
+//            $('.gameStartButton').val('Start Game');
+            $('.startStopButton').css('box-shadow', '5px 5px 20px 5px rgba(0,0,0,.5)');
+            $('.startStopButton').css('background-color', colorScheme.pri);
+            $('.startStopButton').css('color', colorScheme.priLightest);
+            $('.startStopButton').html('Start Game.');
             $('.hangmanGraphic').css('background-color', colorScheme.sec);
             guessedLetters = '';
             guessesLeft = guessesGiven;
@@ -162,7 +166,7 @@ $(document).ready(function () {
     
     //Start of hook/listener section
     //Start game button control section
-    $('.gameStartButton').click(function () {
+    $('.startStopButton').click(function () {
         var i = 0;
 //        console.log(gameState);
         switch (gameState) {
@@ -193,9 +197,6 @@ $(document).ready(function () {
                 $('.startStopButton').css('color', colorScheme.quarDarkest);
                 $('.startStopButton').html('Stop Game.');
             }, ((winPhrase.length) * 100) + 50);
-
-            $(this).css('background-color', 'red');
-            $(this).val('Stop Game');
             break;
 
         case 'inplay':

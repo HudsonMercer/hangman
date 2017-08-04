@@ -36,6 +36,12 @@
 
 }
 
+.hangmanSVG {
+    position: relative;
+    top: 2.5vw;
+    width: 5vw;
+}
+
 .hangmanGraphic {
 	background-color: #F3CD53;
     border: solid 2px #9C7A0B;

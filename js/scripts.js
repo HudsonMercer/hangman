@@ -71,9 +71,11 @@ $(document).ready(function () {
             $('.startStopButton').css('box-shadow', '5px 5px 20px 5px rgba(0,0,0,.5)');
             $('.startStopButton').css('background-color', colorScheme.pri);
             $('.startStopButton').css('color', colorScheme.priLightest);
+            $('.startStopButton').css('border-color', colorScheme.priLightest);
             $('.startStopButton').html('Start Game.');
             $('.hangmanGraphic').css('background-color', colorScheme.sec);
             $('.hangmanGraphic').css('border-color', colorScheme.secDarkest);
+            $('.hangmanGraphic').children('.hangmanSVG').attr('src', 'material-design-icons-master/social/svg/production/ic_mood_48px.svg');
             guessedLetters = '';
             guessesLeft = guessesGiven;
             gameState = 'ready';
@@ -148,6 +150,7 @@ $(document).ready(function () {
             for (i = 0; i <= guessesGiven - guessesLeft; i++) {
                 $(bodyParts[i]).css('background-color', colorScheme.ter);
                 $(bodyParts[i]).css('border-color', colorScheme.terDarkest);
+                $(bodyParts[i]).children('.hangmanSVG').attr('src', 'material-design-icons-master/social/svg/production/ic_mood_bad_48px.svg');
             }
             //Player has run out of tries, the letter doesn't match anything in the win phrase and they havent already guessed it.
             if (guessesLeft === 0) {

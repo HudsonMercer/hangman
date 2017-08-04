@@ -56,7 +56,7 @@ $(document).ready(function () {
         winPhrase = phrases[i];
     }
     
-    //Adds a letter div to the phrase container with the ID of phraseLetterDiv(i) when called.
+    //Adds a letter div to the phrase container with the ID of phraseLetterID# when called.
     function addLetterDiv(i) {
         $('.phraseContainer').append('<div class="phraseLetterDiv" id="phraseLetterID' + i + '">_</div>');
     }
@@ -68,13 +68,12 @@ $(document).ready(function () {
             for (i = 0; i < winPhrase.length; i++) {
                 $('#phraseLetterID' + i).remove();
             }
-//            $('.gameStartButton').css('background-color', 'green');
-//            $('.gameStartButton').val('Start Game');
             $('.startStopButton').css('box-shadow', '5px 5px 20px 5px rgba(0,0,0,.5)');
             $('.startStopButton').css('background-color', colorScheme.pri);
             $('.startStopButton').css('color', colorScheme.priLightest);
             $('.startStopButton').html('Start Game.');
             $('.hangmanGraphic').css('background-color', colorScheme.sec);
+            $('.hangmanGraphic').css('border-color', colorScheme.secDarkest);
             guessedLetters = '';
             guessesLeft = guessesGiven;
             gameState = 'ready';
@@ -150,7 +149,7 @@ $(document).ready(function () {
                 $(bodyParts[i]).css('background-color', colorScheme.ter);
                 $(bodyParts[i]).css('border-color', colorScheme.terDarkest);
             }
-            
+            //Player has run out of tries, the letter doesn't match anything in the win phrase and they havent already guessed it.
             if (guessesLeft === 0) {
                 loseGame();
             }
@@ -181,7 +180,6 @@ $(document).ready(function () {
                 var allLetterDivs = $('.phraseLetterDiv');
                 //Fill in special characters for free and add them to the guessed letters list. white space is faded away to 0 opacity.
                 for (i = 0; i < winPhrase.length; i++) {
-                    $(allLetterDivs[i]).attr('id', 'phraseLetterID' + i);
                     if (winPhrase[i] === ' ') {
                         $(allLetterDivs[i]).html('&nbsp');
                         $(allLetterDivs[i]).toggleClass('fadeAwayCss');
@@ -195,6 +193,7 @@ $(document).ready(function () {
                 $('.startStopButton').css('box-shadow', '0px 0px 10px 5px rgba(0,0,0,0)');
                 $('.startStopButton').css('background-color', colorScheme.quar);
                 $('.startStopButton').css('color', colorScheme.quarDarkest);
+                $('.startStopButton').css('border-color', colorScheme.quarDarkest);
                 $('.startStopButton').html('Stop Game.');
             }, ((winPhrase.length) * 100) + 50);
             break;
@@ -204,6 +203,7 @@ $(document).ready(function () {
             $('.startStopButton').css('box-shadow', '5px 5px 20px 5px rgba(0,0,0,.5)');
             $('.startStopButton').css('background-color', colorScheme.pri);
             $('.startStopButton').css('color', colorScheme.priLightest);
+            $('.startStopButton').css('border-color', colorScheme.priLightest);
             $('.startStopButton').html('Start Game.');
             break;
 
@@ -228,9 +228,6 @@ $(document).ready(function () {
             //Guess a letter the player pressed enter.
             guessSubmit();
         }
-//        else {
-//            $('.testDiv').html($('.inputTextBox').val());
-//        }
     });
     
     //Clear on click/focus for text input box.

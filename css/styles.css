@@ -14,6 +14,9 @@
     height: 2em;
     margin: 1em;
     padding-top: .75em;
+    border: solid 2px;
+    border-radius: 10px;
+    border-color: #A7C5E2;
     text-align: center;
     text-shadow: 3px 3px 8px rgba(0,0,0, .8);
     display: inline-block;

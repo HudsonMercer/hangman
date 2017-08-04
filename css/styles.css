@@ -6,7 +6,20 @@
     left: 0px;
     margin: 0px;
     position: fixed;
+    user-select: none;
 }
+
+.screenDarkener{
+    opacity: .75;
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    animation: fadeInKeyFrames 1s forwards;
+}
+
 .startStopButton {
     box-shadow: 5px 5px 20px 5px rgba(0,0,0,.5);
     color: #A7C5E2;
@@ -21,11 +34,12 @@
     text-shadow: 3px 3px 8px rgba(0,0,0, .8);
     display: inline-block;
     transition: all .5s linear;
+    cursor: hand;   
 }
+
 .graphicsWrapper {
     width: auto;
     text-align: center;
-/*    border: solid 2px #FF00FF;*/
     margin: .5em;
     margin-top: 1em;
     margin-bottom: 4em;
@@ -143,6 +157,16 @@
     }
     
     100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeInKeyFrames {
+    100% {
+        opacity: .75;
+    }
+    
+    0% {
         opacity: 0;
     }
 }

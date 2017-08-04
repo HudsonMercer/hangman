@@ -1,8 +1,11 @@
 //Global variables
 /*jslint plusplus: true, vars: true, devel: true, browser: true */
 /*global $, jQuery */
+
+/* Hangman V1.00, functionally oriented single page game done in Javascript. Full support for all available letters and characters on the EN-US keyboard. Done as a project to build skills in basic Javascript usage, syntax and general language familiarity. Specific concepts used: Arrays, Simple variables, basic bject creation and use, use of loop iteration to edit and analyze strings, regex usage to format strings and run comparisons, use of JQuery, Dynamic editing of the DOM via Javascript, Dynamic editing of CSS via Javascript. 8/4/2017 */
+
 var tryCount = 10,
-    phrases = ['There is no time like the present.', 'Nobody loves you.', 'If you never fail, try harder.', 'War is good for absolutely nothing.', 'Winter.', 'This is a really long phrase that should take up at least 3-4 lines of the box and has weird characters.'],
+    phrases = ['There is no time like the present.', 'Everybody loves you.', 'If you never fail, try harder.', 'War is good for absolutely nothing.', 'Winter.', 'This is a really long phrase that should take up at least 3-4 lines of the box and has weird characters.'],
     winPhrase = '',
     phraseLetters = [],
     phraseLettersDivID = [],
@@ -38,6 +41,7 @@ $(document).ready(function () {
     'use strict';
     $('.winFrame').hide();
     $('.loseFrame').hide();
+    $('.screenDarkener').hide();
     
     
     //Function definitions
@@ -84,6 +88,7 @@ $(document).ready(function () {
     
     //Called to win the game and prevent input.
     function winGame() {
+        $('.screenDarkener').show();
         $('.winFrame').css('width', '0vw');
         $('.winFrame').show();
         $(".winFrame").animate({width: '100vw'}, 350);
@@ -92,6 +97,7 @@ $(document).ready(function () {
     
     //Called to lose the game and prevent input.
     function loseGame() {
+        $('.screenDarkener').show();
         $('.loseFrame').css('width', '0vw');
         $('.loseFrame').show();
         $(".loseFrame").animate({width: '100vw'}, 350);
@@ -105,7 +111,6 @@ $(document).ready(function () {
         for (i = 0; i < winPhrase.length; i++) {
             if (guessedLetters.toLowerCase().indexOf(winPhrase[i].toLowerCase()) !== -1) {
                 if (i === winPhrase.length - 1) {
-                    console.log('Game Won!');
                     winGame();
                 }
             } else if (guessedLetters.toLowerCase().indexOf(winPhrase[i].toLowerCase()) === -1) {
@@ -170,7 +175,6 @@ $(document).ready(function () {
     //Start game button control section
     $('.startStopButton').click(function () {
         var i = 0;
-//        console.log(gameState);
         switch (gameState) {
                 
         case 'ready':
@@ -242,12 +246,14 @@ $(document).ready(function () {
     $('.winFrame').click(function () {
         resetGame();
         $('.winFrame').hide();
+        $('.screenDarkener').hide();
     });
     
     //Reset the game when the player loses and clicks on the win banner.
     $('.loseFrame').click(function () {
         resetGame();
         $('.loseFrame').hide();
+        $('.screenDarkener').hide();
     });
     
   
